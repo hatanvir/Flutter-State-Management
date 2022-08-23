@@ -1,11 +1,17 @@
 
 import 'package:riverpod/riverpod.dart';
-import 'package:riverpod_flutter/home/home_service.dart';
+import 'package:riverpod_flutter/post/post_screen.dart';
+import '../photo/photo_screen.dart';
 
-var homeService = HomeService();
+
+
+var navScreenList = [
+  const PostScreen(),
+  const PhotoScreen()
+];
 
 final stringProvider = Provider((ref)=>'Hello Provider!');
 
 final counterProvider = StateProvider((ref) => 0);
 
-final postListProvider = FutureProvider((ref) => homeService.postData());
+final selectedNavigationProvider = StateProvider((ref) => 0);
