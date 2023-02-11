@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_flutter/extensions/paddding_extension.dart';
 import 'package:riverpod_flutter/photo/photo_provider.dart';
 
 class PhotoScreen extends StatelessWidget {
@@ -29,7 +30,7 @@ class PhotoScreen extends StatelessWidget {
                             Image.network(data[i].thumbnailUrl??'',
                                 errorBuilder: (ctx,b,s)=>const Icon((Icons.error_outline)),height: 100,width: 100,),
 
-                            const SizedBox(width: 10,),
+                            10.width,
 
                             Expanded(
                               child: Text(data[i].title??"",
@@ -43,7 +44,7 @@ class PhotoScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    separatorBuilder: (ctx,i)=>const SizedBox(height: 5,),
+                    separatorBuilder: (ctx,i)=> 5.height,
                     itemCount: data.length
                 ),
                 error: (err,st)=> Text(err.toString()),

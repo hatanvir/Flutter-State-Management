@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_flutter/extensions/paddding_extension.dart';
 import 'package:riverpod_flutter/post/post_provider.dart';
 
 class PostScreen extends StatelessWidget {
@@ -31,18 +32,29 @@ class PostScreen extends StatelessWidget {
                                   fontWeight: FontWeight.bold
                               ),
                             ),
-                            const SizedBox(height: 5,),
+
+                            5.height,
 
                             Text(data[i].body??"",
                               style: const TextStyle(
                                 fontSize: 16,
                               ),
                             ),
+
+                           /* Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.green
+                                ),
+                              ),
+                              child: Text('testjghjghjghj'),
+                            )*/
                           ],
                         ),
                       );
                     },
-                    separatorBuilder: (ctx,i)=>const SizedBox(height: 5,),
+                    separatorBuilder: (ctx,i)=> 5.height,
                     itemCount: data.length
                 ),
                 error: (err,st)=> Text(err.toString()),
