@@ -43,6 +43,7 @@ app.*.map.json
 #pubspec lock
 pubspec.lock
 
+
 # Android Studio will place build artifacts here
 /android/app/debug
 /android/app/profile
