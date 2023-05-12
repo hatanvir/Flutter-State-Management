@@ -1,7 +1,9 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_flutter/data/services/post_service.dart';
 
-var postService = PostService();
+import '../../data/repository/repository_provider.dart';
 
-final postListProvider = FutureProvider((ref) => postService.postData());
+final postListProvider = FutureProvider((ref){
+  RepositoryProvider repository = ref.read(repositoryProvider);
+  return repository.postRepository.getPhotos();
+});
