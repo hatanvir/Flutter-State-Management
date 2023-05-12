@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_flutter/extensions/paddding_extension.dart';
-import 'package:riverpod_flutter/photo/photo_provider.dart';
+import 'package:riverpod_flutter/modules/photo/photo_provider.dart';
 
 class PhotoScreen extends StatelessWidget {
   const PhotoScreen({Key? key}) : super(key: key);

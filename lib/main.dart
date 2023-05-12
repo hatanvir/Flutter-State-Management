@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_flutter/home/home_screen.dart';
+import 'package:riverpod_flutter/modules/home/home_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
