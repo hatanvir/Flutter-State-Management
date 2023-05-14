@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:riverpod_flutter/models/photo_response.dart';
+import 'package:riverpod_flutter/data/models/photo_response.dart';
 
 class PhotoService{
   Future<List<PhotoResponse>> photoData() async{

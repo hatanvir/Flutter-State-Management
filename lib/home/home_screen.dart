@@ -1,42 +1,55 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_flutter/home/home_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:riverpod_flutter/home/home_bloc.dart';
+import 'package:riverpod_flutter/home/home_event.dart';
+import 'package:riverpod_flutter/home/home_state.dart';
+import 'package:riverpod_flutter/photo/photo_bloc.dart';
+import 'package:riverpod_flutter/photo/photo_event.dart';
 
-class HomeScreen extends ConsumerWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  HomeScreen({Key? key}) : super(key: key);
+
+  HomeBloc homeBloc = HomeBloc();
 
   @override
-  Widget build(BuildContext context,ref) {
-    var selectedTab = ref.watch(selectedNavigationProvider);
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => homeBloc,
+      child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Home'),
+          ),
+          body: BlocBuilder<HomeBloc, HomeState>(
+            builder: (ctx,state){
+              return state.navScreenList[state.pos];
+            },
+          ),
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
+          bottomNavigationBar: BlocBuilder<HomeBloc,HomeState>(
+            builder: (ctx,state){
+              return BottomNavigationBar(
+                selectedItemColor: Colors.blue,
+                unselectedItemColor: Colors.grey,
+                currentIndex: state.pos,
+                onTap: (index){
+                  ctx.read<HomeBloc>().add(NavigationPositionChangeEvent(index));
+                },
+                items: [
+                  _bottomNavItem(
+                      title: "Posts",
+                      icon: CupertinoIcons.arrow_up_doc_fill
+                  ),
+
+                  _bottomNavItem(
+                      title: "Photos",
+                      icon: CupertinoIcons.photo
+                  ),
+                ],
+              );
+            },
+          )
       ),
-      body: navScreenList[selectedTab],
-
-      bottomNavigationBar: BottomNavigationBar(
-
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        currentIndex: selectedTab,
-
-        onTap: (index){
-          ref.read(selectedNavigationProvider.notifier).state=index;
-        },
-        items: [
-          _bottomNavItem(
-              title: "Posts",
-              icon: CupertinoIcons.arrow_up_doc_fill
-          ),
-
-          _bottomNavItem(
-              title: "Photos",
-              icon: CupertinoIcons.photo
-          ),
-        ],
-      )
     );
   }
 
@@ -44,7 +57,7 @@ class HomeScreen extends ConsumerWidget {
     return BottomNavigationBarItem(
         icon: Icon(icon),
         tooltip: title,
-        label: title
+        label: title,
     );
   }
 }

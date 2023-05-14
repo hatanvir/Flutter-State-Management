@@ -1,11 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_flutter/home/home_screen.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -43,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return const Scaffold(
       backgroundColor: Colors.blue,
       body: Center(
-        child: Text('Riverpod',
+        child: Text('Bloc',
         style: TextStyle(
           fontSize: 30,
           color: Colors.white
@@ -53,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
    _nextScreen() {
-     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> const HomeScreen()));
+     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> HomeScreen()));
   }
 }
 

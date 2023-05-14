@@ -1,56 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:riverpod_flutter/extensions/paddding_extension.dart';
-import 'package:riverpod_flutter/photo/photo_provider.dart';
+import 'package:riverpod_flutter/photo/photo_bloc.dart';
+import 'package:riverpod_flutter/photo/photo_event.dart';
+import 'package:riverpod_flutter/photo/photo_state.dart';
 
 class PhotoScreen extends StatelessWidget {
   const PhotoScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Consumer(
-          builder: (ctx,ref,child){
-            final postListValue = ref.watch(photoListProvider);
-            return postListValue.when(
-                data: (data)=>ListView.separated(
-                    itemBuilder: (ctx,i){
-                      return Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey[300]
-                        ),
-                        padding: const EdgeInsets.all(10),
+    return BlocProvider(
+      create: (_) => PhotoBloc()..add(GetPhotoEvent()),
+      child: Center(
+        child: BlocBuilder<PhotoBloc,PhotoState>(
+          builder: (ctx,state){
+//            ctx.read<PhotoBloc>().add(GetPhotoEvent());
 
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+            if(state is LoadingState){
+              return const Center(child: CircularProgressIndicator(),);
+            }else if(state is ErrorState){
+              return Center(child: Text(state.msg.toString()),);
+            }else if(state is PhotoLoadedState){
+              return ListView.separated(
+                  itemBuilder: (ctx,i){
+                    return Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey[300]
+                      ),
+                      padding: const EdgeInsets.all(10),
 
-                            Image.network(data[i].thumbnailUrl??'',
-                                errorBuilder: (ctx,b,s)=>const Icon((Icons.error_outline)),height: 100,width: 100,),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
 
-                            10.width,
+                          Image.network(state.photos[i].thumbnailUrl??'',
+                            errorBuilder: (ctx,b,s)=>const Icon((Icons.error_outline)),height: 100,width: 100,),
 
-                            Expanded(
-                              child: Text(data[i].title??"",
-                                style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold
-                                ),
+                          10.width,
+
+                          Expanded(
+                            child: Text(state.photos[i].title??"",
+                              style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
                               ),
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                    separatorBuilder: (ctx,i)=> 5.height,
-                    itemCount: data.length
-                ),
-                error: (err,st)=> Text(err.toString()),
-                loading: ()=>const CircularProgressIndicator()
-            );
-          }
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                  separatorBuilder: (ctx,i)=> 5.height,
+                  itemCount: state.photos.length
+              );
+            }
+            return 0.height;
+          },
+        )
       ),
     );
   }

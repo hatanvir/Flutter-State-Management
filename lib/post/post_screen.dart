@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:riverpod_flutter/extensions/paddding_extension.dart';
-import 'package:riverpod_flutter/post/post_provider.dart';
+import 'package:riverpod_flutter/post/post_bloc.dart';
+import 'package:riverpod_flutter/post/post_event.dart';
+import 'package:riverpod_flutter/post/post_state.dart';
 
 class PostScreen extends StatelessWidget {
   const PostScreen({Key? key}) : super(key: key);
@@ -9,13 +11,18 @@ class PostScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Consumer(
-          builder: (ctx,ref,child){
-            final postListValue = ref.watch(postListProvider);
-            return postListValue.when(
-                data: (data)=>ListView.separated(
-                    itemBuilder: (ctx,i){
-                      return Container(
+      child: BlocProvider(
+        create: (_) => PostBloc()..add(GetPostEvent()),
+        child: BlocBuilder<PostBloc,PostState>(
+          builder: (ctx,state){
+            if(state is LoadingState){
+              return const CircularProgressIndicator();
+            }else if(state is ErrorState){
+              return Text(state.msg);
+            }else if(state is LoadedPostState){
+              return ListView.separated(
+                  itemBuilder: (ctx,i){
+                    return Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.grey[300]
@@ -26,42 +33,33 @@ class PostScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(data[i].title??"",
-                              style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold
-                              ),
-                            ),
-
-                            5.height,
-
-                            Text(data[i].body??"",
-                              style: const TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-
-                           /* Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.green
-                                ),
-                              ),
-                              child: Text('testjghjghjghj'),
-                            )*/
-                          ],
+                        Text(state.postList[i].title??"",
+                          style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold
+                          ),
                         ),
-                      );
-                    },
-                    separatorBuilder: (ctx,i)=> 5.height,
-                    itemCount: data.length
-                ),
-                error: (err,st)=> Text(err.toString()),
-                loading: ()=>const CircularProgressIndicator()
-            );
-          }
-      ),
+
+                        5.height,
+
+                        Text(state.postList[i].body??"",
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                    ],
+                    ),
+                    );
+                  },
+                  separatorBuilder: (ctx,i)=> 5.height,
+                  itemCount: state.postList.length
+              );
+            }else{
+              return 0.height;
+            }
+          },
+        ),
+      )
     );
   }
 }
