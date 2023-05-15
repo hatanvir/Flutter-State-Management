@@ -6,8 +6,8 @@ import 'package:riverpod_flutter/post/post_screen.dart';
 
 class HomeBloc extends Bloc<HomeEvent,HomeState> {
   var navScreenList = [
-    const PostScreen(),
-    const PhotoScreen()
+     PostScreen(),
+     PhotoScreen()
   ];
 
   HomeBloc() : super(HomeState()){

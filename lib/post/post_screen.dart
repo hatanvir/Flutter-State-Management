@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:riverpod_flutter/di/service_locator.dart';
 import 'package:riverpod_flutter/extensions/paddding_extension.dart';
 import 'package:riverpod_flutter/post/post_bloc.dart';
 import 'package:riverpod_flutter/post/post_event.dart';
 import 'package:riverpod_flutter/post/post_state.dart';
 
 class PostScreen extends StatelessWidget {
-  const PostScreen({Key? key}) : super(key: key);
+  PostScreen({Key? key}) : super(key: key);
+  PostBloc postBloc = serviceLocator.get<PostBloc>();
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: BlocProvider(
-        create: (_) => PostBloc()..add(GetPostEvent()),
+        create: (_) => postBloc..add(GetPostEvent()),
         child: BlocBuilder<PostBloc,PostState>(
           builder: (ctx,state){
             if(state is LoadingState){

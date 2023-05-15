@@ -3,8 +3,8 @@ import 'package:riverpod_flutter/post/post_screen.dart';
 
 class HomeState{
   var navScreenList = [
-    const PostScreen(),
-    const PhotoScreen()
+     PostScreen(),
+     PhotoScreen()
   ];
 
   int pos;

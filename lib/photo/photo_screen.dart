@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:riverpod_flutter/di/service_locator.dart';
 import 'package:riverpod_flutter/extensions/paddding_extension.dart';
 import 'package:riverpod_flutter/photo/photo_bloc.dart';
 import 'package:riverpod_flutter/photo/photo_event.dart';
@@ -11,7 +12,7 @@ class PhotoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => PhotoBloc()..add(GetPhotoEvent()),
+      create: (_) => serviceLocator.get<PhotoBloc>()..add(GetPhotoEvent()),
       child: Center(
         child: BlocBuilder<PhotoBloc,PhotoState>(
           builder: (ctx,state){
