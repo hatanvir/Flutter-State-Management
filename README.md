@@ -1,16 +1,51 @@
-# flutter_riverpod
+# Riverpod pattern
 
-A new Flutter project.
+## Riverpod state management system
 
-## Getting Started
+>**Objective**  
+> - Learning riverpod.  
+> - Standard structure with riverpod.   
 
-This project is a starting point for a Flutter application.
+## How does it work? 
 
-A few resources to get you started if this is your first Flutter project:
+### Structure in modules
+```
+_/lib/app
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+    #all data related files will go here
+     - data
+     
+       #all data model will go here
+       - models
+         - photo_response.dart
+         - post_response.dart
+         
+       #this is our middleman. The responsibility of the repository is to provide data to controller. Also we cal call it viewmodel
+       #also we have implemented a repository provider to provide repository instances via provider
+       - repository
+         - photo_repository.dart
+         - post_repository.dart
+         - repository_provider.dart
+         
+       # service will provide all api data to repository
+       # service provider to provide service instances via provider
+       - service
+         - photo_service.dart
+         - post_service.dart
+         - service_provider.dart
+       
+     
+     #all extension files will go here like (padding,mergin,validation)
+     - extension
+       - paddding_extension.dart
+     
+     #all screen related files will go here
+     - modules
+       - home
+         - home_provider.dart
+         - home_screen.dart
+     
+     # main file which will be called for the first time.
+     - main.dart
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
