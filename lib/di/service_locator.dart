@@ -3,9 +3,9 @@ import 'package:riverpod_flutter/data/repository/photo_repository.dart';
 import 'package:riverpod_flutter/data/repository/post_repository.dart';
 import 'package:riverpod_flutter/data/services/photo_service.dart';
 import 'package:riverpod_flutter/data/services/post_service.dart';
-import 'package:riverpod_flutter/home/home_bloc.dart';
-import 'package:riverpod_flutter/photo/photo_bloc.dart';
-import 'package:riverpod_flutter/post/post_bloc.dart';
+import 'package:riverpod_flutter/module/home/home_bloc.dart';
+import 'package:riverpod_flutter/module/photo/photo_bloc.dart';
+import 'package:riverpod_flutter/module/post/post_bloc.dart';
 
 var serviceLocator = GetIt.instance;
 

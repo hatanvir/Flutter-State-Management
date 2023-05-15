@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:riverpod_flutter/di/service_locator.dart';
 import 'package:riverpod_flutter/extensions/paddding_extension.dart';
-import 'package:riverpod_flutter/post/post_bloc.dart';
-import 'package:riverpod_flutter/post/post_event.dart';
-import 'package:riverpod_flutter/post/post_state.dart';
+import 'package:riverpod_flutter/module/post/post_bloc.dart';
+import 'package:riverpod_flutter/module/post/post_event.dart';
+import 'package:riverpod_flutter/module/post/post_state.dart';
 
 class PostScreen extends StatelessWidget {
   PostScreen({Key? key}) : super(key: key);

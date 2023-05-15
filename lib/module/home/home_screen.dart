@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:riverpod_flutter/di/service_locator.dart';
-import 'package:riverpod_flutter/home/home_bloc.dart';
-import 'package:riverpod_flutter/home/home_event.dart';
-import 'package:riverpod_flutter/home/home_state.dart';
+import 'package:riverpod_flutter/module/home/home_bloc.dart';
+import 'package:riverpod_flutter/module/home/home_event.dart';
+import 'package:riverpod_flutter/module/home/home_state.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);

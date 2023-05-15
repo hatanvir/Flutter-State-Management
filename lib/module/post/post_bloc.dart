@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:riverpod_flutter/data/repository/post_repository.dart';
 import 'package:riverpod_flutter/di/service_locator.dart';
-import 'package:riverpod_flutter/post/post_event.dart';
-import 'package:riverpod_flutter/post/post_state.dart';
+import 'package:riverpod_flutter/module/post/post_event.dart';
+import 'package:riverpod_flutter/module/post/post_state.dart';
 
 class PostBloc extends Bloc<PostEvent,PostState>{
   PostRepository postRepository = serviceLocator.get<PostRepository>();

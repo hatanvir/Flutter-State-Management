@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:riverpod_flutter/di/service_locator.dart';
 import 'package:riverpod_flutter/extensions/paddding_extension.dart';
-import 'package:riverpod_flutter/photo/photo_bloc.dart';
-import 'package:riverpod_flutter/photo/photo_event.dart';
-import 'package:riverpod_flutter/photo/photo_state.dart';
+import 'package:riverpod_flutter/module/photo/photo_bloc.dart';
+import 'package:riverpod_flutter/module/photo/photo_event.dart';
+import 'package:riverpod_flutter/module/photo/photo_state.dart';
 
 class PhotoScreen extends StatelessWidget {
   const PhotoScreen({Key? key}) : super(key: key);
