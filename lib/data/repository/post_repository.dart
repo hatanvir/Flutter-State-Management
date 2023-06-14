@@ -1,10 +1,11 @@
-import 'package:riverpod_flutter/data/models/post_response.dart';
+import 'package:riverpod_flutter/data/repository/base_repository.dart';
 import 'package:riverpod_flutter/data/services/post_service.dart';
 
-class PostRepository {
+class PostRepository extends BaseRepository{
   PostService postService = PostService();
 
-  Future<List<PostResponse>> getPost() async{
-    return await postService.postData();
+  @override
+  Future getData() async{
+    return await postService.getData();
   }
 }

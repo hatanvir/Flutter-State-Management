@@ -11,7 +11,7 @@ class PhotoBloc extends Bloc<PhotoEvent,PhotoState> {
     on<GetPhotoEvent>((event, emit) async{
       try {
         emit(LoadingState());
-        final photos = await photoRepository.getPhoto();
+        final photos = await photoRepository.getData();
         emit(PhotoLoadedState(photos));
       }catch(e){
         emit(ErrorState(e.toString()));

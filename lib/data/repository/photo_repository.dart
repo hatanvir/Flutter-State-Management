@@ -1,10 +1,11 @@
-import 'package:riverpod_flutter/data/models/photo_response.dart';
+import 'package:riverpod_flutter/data/repository/base_repository.dart';
 import 'package:riverpod_flutter/data/services/photo_service.dart';
 
-class PhotoRepository {
+class PhotoRepository extends BaseRepository{
   PhotoService photoService = PhotoService();
 
-  Future<List<PhotoResponse>> getPhoto() async{
-    return await photoService.photoData();
+  @override
+  Future getData() async{
+    return await photoService.getData();
   }
 }
